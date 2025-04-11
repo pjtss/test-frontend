@@ -1,53 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Client } from '@stomp/stompjs';
 
 const WS_URL = 'wss://day6.duckdns.org/api/v1/ws';
 
-const StompChat = () => {
-  const [messages, setMessages] = useState([]);
+export default function Base64ImageStreamer() {
+  const [videoFragment, setVideoFragment] = useState(null);
+  const [file, setFile] = useState(null);
+  const stompClient = useRef(null);
 
   useEffect(() => {
-    const stompClient = new Client({
-      brokerURL: WS_URL,
-      reconnectDelay: 5000,
-      debug: msg => console.log('[STOMP]', msg),
-    });
-
-    stompClient.onConnect = () => {
-      console.log('✅ STOMP 연결됨');
-
-      stompClient.subscribe('/api/v1/sub/test', frame => {
-        const payload = JSON.parse(frame.body);
-        setMessages(prev => [...prev, payload]);
-      });
-
-      stompClient.publish({
-        destination: '/api/v1/pub/test',
-        body: JSON.stringify({ message: '안녕하세요, 서버!' }),
+    const client = new Client({ brokerURL: WS_URL, reconnectDelay: 5000 });
+    client.onConnect = () => {
+      client.subscribe('/api/v1/sub/records/1/streaming', frame => {
+        try {
+          const { videoFragment: base64 } = JSON.parse(frame.body);
+          setVideoFragment(`data:image/png;base64,${base64}`);
+        } catch (e) {
+          console.error('Failed to parse incoming message', e);
+        }
       });
     };
-
-    stompClient.onStompError = frame =>
-      console.error('❌ STOMP 에러:', frame.headers['message'], frame.body);
-
-    stompClient.activate();
-
-    return () => {
-      stompClient.deactivate();
-      console.log('🛑 STOMP 연결 해제됨');
-    };
+    client.activate();
+    stompClient.current = client;
+    return () => client.deactivate();
   }, []);
 
+  const sendVideoFragment = () => {
+    if (!file) return alert('파일을 선택하세요');
+    const reader = new FileReader();
+    reader.onload = () => {
+      // reader.result === "data:<mime>;base64,<base64>"
+      const base64 = reader.result.split(',')[1];
+      stompClient.current.publish({
+        destination: '/api/v1/pub/records/1/streaming',
+        body: JSON.stringify({ videoFragment: base64 }),
+      });
+      setFile(null);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
-    <div>
-      <h3>Received Messages</h3>
-      <ul>
-        {messages.map((msg, i) => (
-          <li key={i}>{msg.text}</li>
-        ))}
-      </ul>
+    <div style={{ maxWidth: 400, margin: 'auto' }}>
+      <h3>Base64 Image Streaming</h3>
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={e => setFile(e.target.files[0])}
+      />
+      <button onClick={sendVideoFragment} disabled={!file}>
+        전송
+      </button>
+
+      {videoFragment && (
+        <div style={{ marginTop: 16 }}>
+          <img src={videoFragment} alt="Received" style={{ width: '100%' }} />
+        </div>
+      )}
     </div>
   );
-};
-
-export default StompChat;
+}
