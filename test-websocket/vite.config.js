@@ -9,5 +9,15 @@ export default defineConfig({
   },
   server : {
     host : true
+  },
+  resolve : {
+    alias : {
+      '@' : '/src',
+      'api' : '/src/api',
+      'components' : '/src/components',
+      'assets' : '/src/assets',
+      'utils' : '/src/utils',
+      'hooks' : '/src/hooks'
+    }
   }
 })
