@@ -1,5 +1,4 @@
-import WebSocketTest from './components/WebSocketTest';
-import VideoPlayer from './components/HlsTest';
+import Dshelper from '@/components/Dshelper';
 import { Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -8,13 +7,13 @@ function App() {
     <div>
       <h1>Home</h1>
       <nav>
-        <link to="/">Home</link>
-        <link to="/dshelper">Home</link>
+        <Link to="/">Home</Link>
+        <Link to="/dshelper">dshelper</Link>
       </nav>
       <div>
         <Routes>
-          <Route path="/" element={<WebSocketTest />} />    
-          <Route path="/dshelper" element={<VideoPlayer />} />
+          <Route path="/" element={<Dshelper />} />    
+          <Route path="/dshelper" element={<Dshelper />} />
         </Routes>
       </div>
     </div>
