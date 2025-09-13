@@ -26,3 +26,16 @@ export const login = async () => {
         throw error;
     });
 };
+
+export const kakaoLogin = async () => {
+    await BaseApi.get("/oauth/kakao/login", {
+    }).then((response) => {
+        console.log("로그인 성공", response.data);
+        return response.data;
+    }).catch((error) => {
+        console.error("로그인 실패", error);
+        throw error;
+    });
+};
+
+
