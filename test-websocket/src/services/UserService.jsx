@@ -27,15 +27,25 @@ export const login = async () => {
     });
 };
 
+// kakaoLogin.ts
+
 export const kakaoLogin = async () => {
-    await BaseApi.get("/oauth/kakao/login", {
-    }).then((response) => {
-        console.log("로그인 성공", response.data);
-        return response.data;
-    }).catch((error) => {
+    try {
+        const response = await BaseApi.get("/oauth/kakao/login-url");
+
+        const kakaoRedirectUrl = response.data; // 서버가 반환한 URL (String)
+
+        if (kakaoRedirectUrl) {
+            // ✅ 실제 카카오 로그인 페이지로 리디렉션
+            window.location.href = kakaoRedirectUrl;
+        } else {
+            console.error("URL 없음");
+        }
+    } catch (error) {
         console.error("로그인 실패", error);
         throw error;
-    });
+    }
 };
+
 
 
