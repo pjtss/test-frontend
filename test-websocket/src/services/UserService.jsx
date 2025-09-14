@@ -31,16 +31,18 @@ export const login = async () => {
 
 export const kakaoLogin = async () => {
     try {
-        const response = await BaseApi.get("/oauth/kakao/login-url");
+        window.location.href = "https://www.dshelper.kro.kr/oauth/kakao/login-url";
+        // await BaseApi.get("/oauth/kakao/login-url");
+        // const response = 
 
-        const kakaoRedirectUrl = response.data; // 서버가 반환한 URL (String)
+        // const kakaoRedirectUrl = response.data; // 서버가 반환한 URL (String)
 
-        if (kakaoRedirectUrl) {
+        // if (kakaoRedirectUrl) {
             // ✅ 실제 카카오 로그인 페이지로 리디렉션
-            window.location.href = kakaoRedirectUrl;
-        } else {
-            console.error("URL 없음");
-        }
+            // window.location.href = kakaoRedirectUrl;
+        // } else {
+            // console.error("URL 없음");
+        // }
     } catch (error) {
         console.error("로그인 실패", error);
         throw error;
