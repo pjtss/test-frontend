@@ -32,7 +32,7 @@ export const login = async () => {
 export const kakaoLogin = async () => {
     try {
         // window.location.href = "https://www.dshelper.kro.kr/oauth/kakao/login-url";
-        await BaseApi.get("/oauth/kakao/login-url");
+        const response = await BaseApi.get("/oauth/kakao/login-url");
         const kakaoRedirectUrl = response.data; // 서버가 반환한 URL (String)
 
         if (kakaoRedirectUrl) {
