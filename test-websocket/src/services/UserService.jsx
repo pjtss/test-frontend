@@ -1,16 +1,40 @@
 import BaseApi from '@/api/BaseApi.jsx';
 
-export const join = async () => {
-    await BaseApi.post("/auth/join/organization", {
-        email: "user@gmail.com",
-        password: "useruser",
-        passwordCheck: "useruser"
-    }).then((response) => {
-        console.log("회원가입 성공", response.data);
-        return response.data;
-    }).catch((error) => {
-        console.error("회원가입 실패", error);
-        throw error;
+export const join = async (files) => {
+  // DTO 만들기
+  const dto = {
+    email: "user@gmail.com",
+    password: "useruser",
+    passwordCheck: "useruser"
+  };
+
+  // FormData 생성
+  const formData = new FormData();
+  formData.append(
+    "dto",
+    new Blob([JSON.stringify(dto)], { type: "application/json" })
+  );
+
+  // 파일이 있다면 certifications에 추가
+  if (files) {
+    Array.from(files).forEach((file) => {
+      formData.append("certifications", file);
+    });
+  }
+
+  // 요청 보내기
+  return await BaseApi.post("/auth/join/organization", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  })
+    .then((response) => {
+      console.log("회원가입 성공", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("회원가입 실패", error);
+      throw error;
     });
 };
 
