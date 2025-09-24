@@ -1,39 +1,43 @@
 import BaseApi from '@/api/BaseApi.jsx';
 
 export const join = async (files) => {
-  // DTO 만들기
+  // DTO 객체 - DTO 클래스 필드에 맞춰 작성
   const dto = {
-    email: "user@gmail.com",
-    password: "useruser",
-    passwordCheck: "useruser"
+    email: "test@test.com",
+    password: "testtest",
+    passwordCheck: "testtest",
+    organizationName: "testOrganization",
+    organizationPhoneNumber: "010-1234-5678"
   };
 
   // FormData 생성
   const formData = new FormData();
+
+  // dto -> JSON -> Blob 변환 후 append
   formData.append(
     "dto",
     new Blob([JSON.stringify(dto)], { type: "application/json" })
   );
 
-  // 파일이 있다면 certifications에 추가
+  // 파일이 있으면 certifications로 append
   if (files) {
     Array.from(files).forEach((file) => {
       formData.append("certifications", file);
     });
   }
 
-  // 요청 보내기
+  // axios 요청
   return await BaseApi.post("/auth/join/organization", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   })
     .then((response) => {
-      console.log("회원가입 성공", response.data);
+      console.log("기관 회원가입 성공", response.data);
       return response.data;
     })
     .catch((error) => {
-      console.error("회원가입 실패", error);
+      console.error("기관 회원가입 실패", error);
       throw error;
     });
 };
