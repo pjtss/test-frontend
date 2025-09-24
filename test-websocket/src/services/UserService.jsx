@@ -43,9 +43,16 @@ export const join = async (files) => {
 };
 
 export const login = async () => {
-    await BaseApi.post("/auth/login/organization", {
-        email: "test@test.com", 
-        password: "testtest"
+  const payload = {
+    email: "test@test.com",
+    password: "testtest"
+  };
+
+  console.log("보내기 직전 payload:", payload);
+
+  
+    await BaseApi.post("/auth/login/organization", { 
+      payload
     }).then((response) => {
         console.log("로그인 성공", response.data);
         return response.data;
