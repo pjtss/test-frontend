@@ -1,7 +1,7 @@
 import BaseApi from '@/api/BaseApi.jsx';
 
 export const join = async () => {
-    await BaseApi.post("/auth/join", {
+    await BaseApi.post("/auth/join/organization", {
         email: "user@gmail.com",
         password: "useruser",
         passwordCheck: "useruser"
@@ -15,7 +15,7 @@ export const join = async () => {
 };
 
 export const login = async () => {
-    await BaseApi.post("/auth/login", {
+    await BaseApi.post("/auth/login/organization", {
         email: "user@gmail.com",
         password: "useruser"
     }).then((response) => {
