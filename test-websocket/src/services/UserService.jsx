@@ -11,7 +11,7 @@ export const join = async (files) => {
   };
 
   // FormData 생성
-  const formData = new FormData();
+  const formData = new FormData();                    
 
   // dto -> JSON -> Blob 변환 후 append
   formData.append(
