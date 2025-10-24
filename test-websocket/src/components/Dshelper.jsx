@@ -1,4 +1,4 @@
-import {join, login, kakaoLogin, logout} from '@/services/UserService.jsx';
+import {join, login, kakaoLogin, naverLogin, logout} from '@/services/UserService.jsx';
 
 
 export default function dshelper() {
@@ -9,6 +9,7 @@ export default function dshelper() {
             <button onClick={join} > 회원가입 </button>
             <button onClick={login} > 로그인 </button>
             <button onClick={kakaoLogin} > 카카오로그인 </button>
+            <button onClick={naverLogin} > 네이버로그인 </button>
             <button onClick={logout} > 로그아웃 </button>
         </div>
     );

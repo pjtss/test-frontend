@@ -49,6 +49,24 @@ export const kakaoLogin = async () => {
     }
 };
 
+// naverLogin 
+
+export const naverLogin = async () => {
+    try {
+        const response = await BaseApi.get("/oauth/naver/login-url");
+        const naverRedirectUrl = response.data;
+
+        if (naverRedirectUrl) {
+            window.location.href = naverRedirectUrl;
+        } else {
+            console.error("URL 없음");
+        }
+    } catch (error) {
+        console.error("로그인 실패", error);
+        throw error;
+    }
+};
+
 export const logout = async () => {
     try {
         // window.location.href = "https://www.dshelper.kro.kr/oauth/kakao/login-url";
