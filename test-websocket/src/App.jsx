@@ -10,6 +10,7 @@ function App() {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/dshelper">dshelper</Link>
+        <Link to="/admin/inquiry">Inquiry List</Link>
       </nav>
       <div>
         <Routes>

@@ -10,7 +10,7 @@ function InquiryList() {
 
   useEffect(() => {
     axios
-      .get("/admin/inquires/un-replied") // 자동으로 https://server.dshelper.kr/api/inquiries
+      .get("/admin/inquires/un-replied") // 문의 목록 불러오기
       .then(res => setInquiries(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -19,16 +19,26 @@ function InquiryList() {
     setInquiries(inquiries.filter(item => item.inquiryId !== id));
   };
 
+  // ✅ 답변 완료 시 목록에서 제거 or 상태 업데이트
+  const handleReply = (id) => {
+    setInquiries(inquiries.filter(item => item.inquiryId !== id));
+  };
+
   return (
     <div>
       <h1>문의 목록</h1>
-      {inquiries.map(inquiry => (
-        <InquiryItem
-          key={inquiry.inquiryId}
-          inquiry={inquiry}
-          onCancel={handleCancel}
-        />
-      ))}
+      {inquiries.length === 0 ? (
+        <p>답변이 필요한 문의가 없습니다.</p>
+      ) : (
+        inquiries.map(inquiry => (
+          <InquiryItem
+            key={inquiry.inquiryId}
+            inquiry={inquiry}
+            onCancel={handleCancel}
+            onReply={handleReply}
+          />
+        ))
+      )}
     </div>
   );
 }
