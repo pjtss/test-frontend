@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "https://www.dshelper.kro.kr", // .env에 정의
+  baseURL: import.meta.env.VITE_API_BASE_URL || "https://server.dshelper.kr", // .env에 정의
   withCredentials: true, // 쿠키 인증 사용 시
   headers: {
     "Content-Type": "application/json",

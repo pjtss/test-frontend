@@ -1,4 +1,5 @@
 import Dshelper from '@/components/Dshelper';
+import InquiryList from '@/components/admin/InquiryList';
 import { Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dshelper />} />    
           <Route path="/dshelper" element={<Dshelper />} />
+          <Route path="/admin/inquiry" element={<InquiryList />} />
         </Routes>
       </div>
     </div>
