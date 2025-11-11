@@ -54,7 +54,6 @@ export const logout = async () => {
         // window.location.href = "https://www.dshelper.kro.kr/oauth/kakao/login-url";
         const response = await BaseApi.get("/logout");
         console.log("로그아웃 성공", response.data);
-        return response.data;
     } catch (error) {
         console.error("로그인 실패", error);
         throw error;
