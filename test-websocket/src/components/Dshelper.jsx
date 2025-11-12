@@ -1,5 +1,5 @@
 import {join, login, kakaoLogin, naverLogin, logout} from '@/services/UserService.jsx';
-import {inquiryList} from '@/components/admin/InquiryList.jsx';
+import InquiryList from '@/components/admin/InquiryList.jsx';
 
 export default function dshelper() {
 
@@ -11,7 +11,7 @@ export default function dshelper() {
             <button onClick={kakaoLogin} > 카카오로그인 </button>
             <button onClick={naverLogin} > 네이버로그인 </button>
             <button onClick={logout} > 로그아웃 </button>
-            <button onClick={inquiryList} > 관리자 문의 관리 페이지 </button>
+            <button onClick={InquiryList} > 관리자 문의 관리 페이지 </button>
         </div>
     );
 }
