@@ -3,6 +3,8 @@ import axios from "axios";
 import InquiryItem from "./InquiryItem";
 
 axios.defaults.baseURL = "https://server.dshelper.kr";
+axios.defaults.withCredentials = true;
+
 
 function InquiryList() {
   const [inquiries, setInquiries] = useState([]);

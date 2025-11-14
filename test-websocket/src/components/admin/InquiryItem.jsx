@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 axios.defaults.baseURL = "https://server.dshelper.kr";
+axios.defaults.withCredentials = true;
 
 function InquiryItem({ inquiry, onCancel, onReply }) {
   const [replyContent, setReplyContent] = useState("");
