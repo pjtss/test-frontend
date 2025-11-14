@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import InquiryItem from "./InquiryItem";
 
-// ✅ 전역 기본 URL 설정
 axios.defaults.baseURL = "https://server.dshelper.kr";
 
 function InquiryList() {
@@ -10,18 +9,20 @@ function InquiryList() {
 
   useEffect(() => {
     axios
-      .get("/admin/inquires/un-replied") // 문의 목록 불러오기
-      .then(res => setInquiries(res.data))
+      .get("/admin/inquires/un-replied")
+      .then(res => {
+        console.log(res.data);
+        setInquiries(res.data.inquiries); // ← 수정됨!
+      })
       .catch(err => console.error(err));
   }, []);
 
   const handleCancel = (id) => {
-    setInquiries(inquiries.filter(item => item.inquiryId !== id));
+    setInquiries(prev => prev.filter(item => item.inquiryId !== id));
   };
 
-  // ✅ 답변 완료 시 목록에서 제거 or 상태 업데이트
   const handleReply = (id) => {
-    setInquiries(inquiries.filter(item => item.inquiryId !== id));
+    setInquiries(prev => prev.filter(item => item.inquiryId !== id));
   };
 
   return (

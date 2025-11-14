@@ -5,7 +5,7 @@ axios.defaults.baseURL = "https://server.dshelper.kr";
 
 function InquiryItem({ inquiry, onCancel, onReply }) {
   const [replyContent, setReplyContent] = useState("");
-  const [open, setOpen] = useState(false); // ✅ 답변창 열림 상태
+  const [open, setOpen] = useState(false);
 
   const cancelInquiry = () => {
     axios.patch(`/api/inquiries/${inquiry.inquiryId}/cancel`)
@@ -23,16 +23,16 @@ function InquiryItem({ inquiry, onCancel, onReply }) {
       inquiryId: inquiry.inquiryId,
       content: replyContent
     })
-    .then(() => {
-      alert("답변이 등록되었습니다.");
-      setReplyContent("");
-      setOpen(false); // 답변 후 닫기
-      onReply(inquiry.inquiryId);
-    })
-    .catch(err => {
-      console.error(err);
-      alert("답변 등록 중 오류가 발생했습니다.");
-    });
+      .then(() => {
+        alert("답변이 등록되었습니다.");
+        setReplyContent("");
+        setOpen(false);
+        onReply(inquiry.inquiryId);
+      })
+      .catch(err => {
+        console.error(err);
+        alert("답변 등록 중 오류가 발생했습니다.");
+      });
   };
 
   return (
@@ -42,12 +42,31 @@ function InquiryItem({ inquiry, onCancel, onReply }) {
         style={{ cursor: "pointer", color: open ? "#007bff" : "black" }}
         onClick={() => setOpen(!open)}
       >
-        {inquiry.title}
+        {/* 🔥 inquiry.title은 백엔드에 없음 → content를 제목처럼 사용 */}
+        {inquiry.type} - {inquiry.user.name}
       </h3>
+
       <p>{inquiry.content}</p>
       <p><small>작성일: {inquiry.createdAt}</small></p>
 
-      {/* ✅ 답변창은 open 상태일 때만 보임 */}
+      {/* 🔥 이미지가 있을 때만 표시 */}
+      {inquiry.imageUrls.length > 0 && (
+        <div style={{ marginTop: "10px" }}>
+          <b>이미지:</b>
+          <div style={{ display: "flex", gap: "10px", marginTop: "6px" }}>
+            {inquiry.imageUrls.map((url, idx) => (
+              <img
+                key={idx}
+                src={url}
+                alt="inquiry"
+                style={{ width: "120px", height: "120px", objectFit: "cover", borderRadius: "6px" }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 답변창 */}
       {open && (
         <div style={{ marginTop: "10px" }}>
           <textarea
@@ -57,6 +76,7 @@ function InquiryItem({ inquiry, onCancel, onReply }) {
             rows="3"
             style={{ width: "100%", resize: "none" }}
           />
+
           <div style={{ marginTop: "5px" }}>
             <button onClick={submitReply}>답변하기</button>
             <button onClick={cancelInquiry} style={{ marginLeft: "10px" }}>
