@@ -1,6 +1,6 @@
 import {join, login, kakaoLogin, naverLogin, logout} from '@/services/UserService.jsx';
 import InquiryList from '@/components/admin/InquiryList.jsx';
-import AdminReservations from '@/components/services/PersonalReservationService';
+import AdminReservations from '@/services/PersonalReservationService';
 
 export default function dshelper() {
 

@@ -1,6 +1,6 @@
 import Dshelper from '@/components/Dshelper';
 import InquiryList from '@/components/admin/InquiryList';
-import AdminReservations from '@/components/services/PersonalReservationService';
+import AdminReservations from '@/services/PersonalReservationService.jsx';
 import { Routes, Route, Link } from 'react-router-dom';
 
 function App() {
