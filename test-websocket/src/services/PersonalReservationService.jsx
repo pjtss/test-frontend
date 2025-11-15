@@ -34,7 +34,7 @@ function AdminReservations() {
   // 2. 완료 / 취소 처리
   const handlePersonalReservationStatusChange = async (reservationId, status) => {
     try {
-      await axios.post("/admin/personal-reservation/status", {
+      await axios.patch("/admin/personal-reservation/status", {
         reservationId,
         status   // "완료" 또는 "취소"
       });
@@ -50,7 +50,7 @@ function AdminReservations() {
    // 2. 완료 / 취소 처리
   const handleOrganizationReservationStatusChange = async (reservationId, status) => {
     try {
-      await axios.post("/admin/organization-reservation/status", {
+      await axios.patch("/admin/organization-reservation/status", {
         reservationId,
         status   // "완료" 또는 "취소"
       });
