@@ -74,7 +74,7 @@ function AdminReservations() {
             <th>방문일</th>
             <th>시간</th>
             <th>상태</th>
-            <th>비고</th>
+            <th>도움 요청 내용</th>
           </tr>
         </thead>
         <tbody>
@@ -85,6 +85,7 @@ function AdminReservations() {
               <td>{item.visitDate}</td>
               <td>{item.startTime} ~ {item.endTime}</td>
               <td>{item.reservationStatus}</td>
+              <td>{item.requirement}</td>
               <td>
                 <button onClick={() => handlePersonalReservationStatusChange(item.personalReservationId, "완료")}>
                   완료
@@ -111,7 +112,7 @@ function AdminReservations() {
             <th>방문일</th>
             <th>시간</th>
             <th>상태</th>
-            <th>비고</th>
+            <th>도움 요청 내용</th>
           </tr>
         </thead>
         <tbody>
@@ -123,6 +124,7 @@ function AdminReservations() {
               <td>{item.visitDate}</td>
               <td>{item.startTime} ~ {item.endTime}</td>
               <td>{item.reservationStatus}</td>
+              <td>{item.requirement}</td>
               <td>
                 <button onClick={() => handleOrganizationReservationStatusChange(item.organizationReservationId, "완료")}>
                   완료
