@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-axios.default.url = "https://server.dshelper.kr"
-axios.default.credentials = true;
+axios.defaults.baseURL = "https://server.dshelper.kr"
+axios.defaults.withCredentials = true;
 
 function AdminReservations() {
   const [personalReservations, setPersonalReservations] = useState([]);
