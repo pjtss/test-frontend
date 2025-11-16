@@ -75,6 +75,7 @@ function AdminReservations() {
             <th>시간</th>
             <th>상태</th>
             <th>도움 요청 내용</th>
+            <th>특이사항</th>
           </tr>
         </thead>
         <tbody>
@@ -86,6 +87,7 @@ function AdminReservations() {
               <td>{item.startTime} ~ {item.endTime}</td>
               <td>{item.reservationStatus}</td>
               <td>{item.requirement}</td>
+              <td>{item.note}</td>
               <td>
                 <button onClick={() => handlePersonalReservationStatusChange(item.personalReservationId, "완료")}>
                   완료
