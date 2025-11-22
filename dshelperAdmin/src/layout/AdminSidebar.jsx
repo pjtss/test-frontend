@@ -22,10 +22,10 @@ export default function AdminSidebar() {
     >
       <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>💚 DSHelper Admin</h2>
 
-      <Link style={linkStyle} to="/">🏠 Home</Link>
-      <Link style={linkStyle} to="/admin/inquiry">📩 Inquiry List</Link>
-      <Link style={linkStyle} to="/admin/reservations">📅 Reservations</Link>
-      <Link style={linkStyle} to="/admin/create-post">📝 Create Post</Link>
+      <Link style={linkStyle} to="/">🏠 홈 화면</Link>
+      <Link style={linkStyle} to="/admin/inquiry">📩 문의 관리</Link>
+      <Link style={linkStyle} to="/admin/reservations">📅 예약 관리</Link>
+      <Link style={linkStyle} to="/admin/create-post">📝 도와드린 이야기</Link>
     </aside>
   );
 }
