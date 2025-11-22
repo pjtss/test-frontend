@@ -11,7 +11,11 @@ function App() {
   return (
     <Routes>
       {/* 일반 사용자 페이지 */}
-      <Route path="/" element={<Dshelper />} />
+      <Route path="/"
+       element={
+        <AdminLayout>
+          <Dshelper />
+        </AdminLayout>} />
 
       {/* 관리자 페이지 - AdminLayout 적용 */}
       <Route
