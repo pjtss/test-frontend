@@ -31,7 +31,7 @@ export default function AdminSidebar() {
 }
 
 const linkStyle = {
-  color: "white",
+  color: "white", 
   textDecoration: "none",
   padding: "10px 12px",
   borderRadius: "8px",
