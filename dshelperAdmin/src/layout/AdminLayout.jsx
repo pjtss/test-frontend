@@ -1,5 +1,5 @@
 // src/layout/AdminLayout.jsx
-import AdminSidebar from "@/layout/AdminSidebar.jsx";
+import AdminSidebar from "./AdminSidebar.jsx";
 
 export default function AdminLayout({ children }) {
   return (
