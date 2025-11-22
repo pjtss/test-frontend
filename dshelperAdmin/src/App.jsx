@@ -3,7 +3,7 @@ import Dshelper from "@/components/Dshelper";
 import InquiryList from "@/components/admin/InquiryList";
 import AdminReservations from "@/services/PersonalReservationService.jsx";
 import PostCreatePage from "@/pages/PostCreatePage.jsx";
-import AdminLayout from "@/layout/AdminLayout";
+import AdminLayout from "@/layout/AdminLayout.jsx";
 
 import { Routes, Route } from "react-router-dom";
 
