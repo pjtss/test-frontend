@@ -1,5 +1,5 @@
 // src/api/postApi.js
-import baseApi from "@/api/baseApi";
+import baseApi from "@/api/BaseApi";
 
 export const createPost = async (dto, images) => {
   const formData = new FormData();
